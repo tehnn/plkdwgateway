@@ -28,13 +28,9 @@ public class Main {
         Server2 server = new Server2();
         //Thread serverThread = new Thread(server);
 
-
         //Client client1 = new Client();
         //Thread clientThread1 = new Thread(client1);
-
         //serverThread.start();
-
         //clientThread1.start();
-
     }
 }
