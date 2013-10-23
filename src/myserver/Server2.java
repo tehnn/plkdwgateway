@@ -35,13 +35,7 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (UnsupportedLookAndFeelException ex) {
-            ex.printStackTrace();
-        } catch (IllegalAccessException ex) {
-            ex.printStackTrace();
-        } catch (InstantiationException ex) {
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
+        } catch (UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
         /* Turn off metal's use of bold fonts */
@@ -96,6 +90,7 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
         evt_log = new javax.swing.JTextArea();
         txtPort = new javax.swing.JTextField();
         btnExit = new javax.swing.JButton();
+        lbIp = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -120,6 +115,8 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        btnStart.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnStart.setForeground(new java.awt.Color(0, 153, 64));
         btnStart.setText("Start");
         btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +124,8 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(6, 215, 53));
         jLabel1.setText(" PORT : ");
 
         jPanel1.setBackground(new java.awt.Color(115, 115, 115));
@@ -231,6 +230,9 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
             }
         });
 
+        lbIp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbIp.setText("Running on");
+
         jMenu1.setText("File");
 
         jMenuItem2.setText("Exit");
@@ -269,7 +271,9 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbIp)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtPort)
@@ -282,10 +286,13 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnStart)
-                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnStart)
+                        .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(lbIp)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1)
                 .addGap(18, 18, 18)
@@ -366,10 +373,10 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
             txtPort.setEditable(false);
             while (true) {
                 //*Listen for new connections
-                Socket socket = serverSocket.accept();
+                Socket socketServ = serverSocket.accept();
 
                 //*handle client in new thread
-                ClientHandler handle = new ClientHandler(socket, client_id++);
+                ClientHandler handle = new ClientHandler(socketServ, client_id++);
                 Thread newThread = new Thread(handle);
                 newThread.start();
             }
@@ -427,7 +434,7 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
                         }
                         //cli.setText("[" + clientID + "]" + instring + "\n");
 
-                        mysql.query("insert into pp (text) values ('" + instring + "')");
+                        mysql.query("insert ignore into pp (text) values ('" + instring + "')");
 
                         output.println("0");
 
@@ -478,6 +485,7 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbConTo;
+    private javax.swing.JLabel lbIp;
     private javax.swing.JMenuItem mnuClear;
     private javax.swing.JPopupMenu popmnu;
     private javax.swing.JLabel txtCountClient;
