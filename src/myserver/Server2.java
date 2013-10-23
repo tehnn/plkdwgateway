@@ -1,21 +1,17 @@
-
 package myserver;
 
 import UTEHN.SimpleMySQL;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.util.Date;
-import javax.swing.JDialog;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.ini4j.Ini;
@@ -25,7 +21,7 @@ import org.ini4j.Ini;
  * @author Administrator
  */
 public class Server2 extends javax.swing.JFrame implements Runnable {
-    
+
     String HOST, USER, PASS, DB;
 
     private int PORT = 2000;
@@ -76,8 +72,6 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
          }
          //</editor-fold>
          * */
-
-
     }//end constructor
 
     @SuppressWarnings("unchecked")
@@ -306,7 +300,6 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
 
         String port = txtPort.getText().toString().trim();
 
-
         if (port.equals("")) {
             return;
         }
@@ -315,12 +308,10 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
         try {
             new Thread(this).start();
 
-
             this.setTitle("Server port " + PORT + " Strated.");
 
         } catch (Exception e) {
             e.printStackTrace();
-
 
         }
 
@@ -350,14 +341,13 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_lbConToMouseClicked
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-         try {
+        try {
             Ini ini = new Ini(new File("dwconfig.ini"));
             HOST = ini.get("Connection", "HOST");
             USER = ini.get("Connection", "USER");
             PASS = ini.get("Connection", "PASS");
             DB = ini.get("Connection", "DB");
-            lbConTo.setText("[Dw:"+HOST+" , Db:"+DB+"]");
-           
+            lbConTo.setText("[Dw:" + HOST + " , Db:" + DB + "]");
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -377,7 +367,6 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
             while (true) {
                 //*Listen for new connections
                 Socket socket = serverSocket.accept();
-
 
                 //*handle client in new thread
                 ClientHandler handle = new ClientHandler(socket, client_id++);
@@ -409,8 +398,6 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
 
         public void run() {
 
-
-
             SimpleMySQL mysql = new SimpleMySQL();
             mysql.connect("localhost:3307", "sa", "sa", "plkdwdc", "tis620");
 
@@ -420,12 +407,7 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
             evt_log.append(new Date() + ":" + clientID + "-Connection from: " + client_socket + '\n');
             evt_log.setCaretPosition(evt_log.getDocument().getLength());
 
-
-
-
             try {
-
-
 
                 brinp = new BufferedReader(new InputStreamReader(client_socket.getInputStream(), Charset.forName("TIS-620")));
                 //DataOutputStream output = new DataOutputStream(_socket.getOutputStream());
@@ -449,11 +431,9 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
 
                         output.println("0");
 
-
                         if (output.checkError()) {
                             throw new IOException("Error transmitting data.");
                         }
-
 
                     } catch (IOException e) {
                         evt_log.append(new Date() + ": Err 1 " + e.toString() + " - " + client_socket + "\n");
@@ -470,7 +450,6 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
                     }
 
                 }
-
 
             } catch (IOException e) {
                 evt_log.append(new Date() + ": Err 2 " + e.toString() + '\n');
