@@ -127,7 +127,7 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(6, 215, 53));
-        jLabel1.setText(" PORT : ");
+        jLabel1.setText("NUMBER :");
 
         jPanel1.setBackground(new java.awt.Color(115, 115, 115));
 
@@ -235,7 +235,7 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
 
         lbIp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lbIp.setForeground(new java.awt.Color(245, 32, 32));
-        lbIp.setText("Running on");
+        lbIp.setText("PORT");
 
         jMenu1.setText("File");
 

@@ -150,7 +150,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="35" green="d7" red="6" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value=" PORT : "/>
+        <Property name="text" type="java.lang.String" value="NUMBER :"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
@@ -375,7 +375,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="20" green="20" red="f5" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Running on"/>
+        <Property name="text" type="java.lang.String" value="PORT"/>
       </Properties>
     </Component>
   </SubComponents>
