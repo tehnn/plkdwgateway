@@ -12,6 +12,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.Charset;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.ini4j.Ini;
@@ -223,6 +224,8 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
 
         txtPort.setText("2000");
 
+        btnExit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(255, 51, 51));
         btnExit.setText(" Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,6 +234,7 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
         });
 
         lbIp.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lbIp.setForeground(new java.awt.Color(245, 32, 32));
         lbIp.setText("Running on");
 
         jMenu1.setText("File");
@@ -330,7 +334,14 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_mnuClearActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        System.exit(0);
+        
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "ออกจากโปรแกรม", "Confirm", dialogButton);
+        if (dialogResult == 0) {
+           
+            System.exit(0);
+        }
+        
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -339,7 +350,12 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        System.exit(0);
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "ออกจากโปรแกรม", "Confirm", dialogButton);
+        if (dialogResult == 0) {
+           
+            System.exit(0);
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void lbConToMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbConToMouseClicked
