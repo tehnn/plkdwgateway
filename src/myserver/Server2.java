@@ -422,7 +422,7 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
         public void run() {
 
             SimpleMySQL mysql = new SimpleMySQL();
-            mysql.connect("localhost:3307", "sa", "sa", "plkdwdc", "tis620");
+            mysql.connect(HOST,USER,PASS,DB, "tis620");
 
             txtCountClient.setText(String.valueOf(count));
 
@@ -446,11 +446,22 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
                         try {
                             instring = instring.substring(1);
                             instring = instring.substring(0, instring.length() - 1);
+                            instring = instring.replaceAll("\\s+","");
                         } catch (Exception e) {
                         }
-                        //cli.setText("[" + clientID + "]" + instring + "\n");
-
-                        mysql.query("insert ignore into pp (text) values ('" + instring + "')");
+                        
+                        String[] pcuDb = instring.split(",");
+                        //cli.setText(lineArray[0]+"\n");
+                        String data = instring.replace(pcuDb[0],"");
+                        data = data.substring(1);
+                        cli.setText(data + "\n");
+                        String pcu = pcuDb[0].substring(0,5);
+                        String db = pcuDb[0].substring(5,pcuDb[0].length() - 0);
+                        //System.out.println(pcu+","+db);
+                        
+                        
+                        System.out.println("replace into "+db+" values (" + data + ")");
+                        mysql.query("replace into "+db+" values (" + data + ")");
 
                         output.println("0");
 
