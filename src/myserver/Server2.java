@@ -432,7 +432,8 @@ public class Server2 extends javax.swing.JFrame implements Runnable {
 
             try {
 
-                brinp = new BufferedReader(new InputStreamReader(client_socket.getInputStream(), Charset.forName("TIS-620")));
+                
+                brinp = new BufferedReader(new InputStreamReader(client_socket.getInputStream(), Charset.forName("UTF-8")));
                 //DataOutputStream output = new DataOutputStream(_socket.getOutputStream());
                 output = new PrintWriter(new OutputStreamWriter(client_socket.getOutputStream()), true);//*
                 output.println("person,patient");
